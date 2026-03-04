@@ -31,6 +31,44 @@ const removeActive = () => {
     commonBtn.forEach((btn) => btn.classList.remove("active"));
 }
 
+//step 6
+
+const loadWordDetails = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/word/${id}`
+
+    const res = await fetch(url);
+    const details = await res.json();
+    displayDetailsAboutWord(details.data);
+}
+
+//7 
+
+const displayDetailsAboutWord = (word) => {
+
+    const detailsContainer = document.getElementById('detailsContainer');
+    detailsContainer.innerHTML = `
+      <div>
+      <h2 class="text-4xl font-bold">${word.word} (<i class="fa-solid fa-microphone-lines"></i>: ${word.pronunciation})</h2>
+      </div>
+          <div>
+             <h2 class="text-2xl font-bold">Meaning</h2>
+              <p>${word.meaning}</p>
+          </div>
+          <div>
+              <h2 class=" font-bold">Example</h2>
+              <p>${word.sentence}</p>
+          </div>
+          <div>
+              <h2 class="font-bold">Synonym</h2>
+              <span class="btn">Syn123</span>
+              <span class="btn">Syn2</span>
+              <span class="btn">Syn3</span>
+          </div>
+            
+    `
+    document.getElementById('my_modal_5').showModal();
+}
+
 //step-4
 
 const displayLevelWord = (words) => {
@@ -57,7 +95,7 @@ const displayLevelWord = (words) => {
     <p class="font-eng text-2xl ">Meaning / Pronunciation</p>
     <p class="font-bangla font-semibold text-2xl">"${word.meaning ? word.meaning : "অর্থ নেই"} / ${word.pronunciation ? word.pronunciation : "উচ্চারণ নেই"}"</p>
     <div class=" flex justify-between items-center">
-        <button class="btn"><i class="fa-solid fa-circle-info"></i></button>
+        <button onclick="loadWordDetails(${word.id})" class="btn"><i class="fa-solid fa-circle-info"></i></button>
         <button class="btn"><i class="fa-solid fa-volume-high"></i></button>
     </div>
 </div>
