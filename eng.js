@@ -60,13 +60,18 @@ const displayDetailsAboutWord = (word) => {
           </div>
           <div>
               <h2 class="font-bold">Synonym</h2>
-              <span class="btn">Syn123</span>
-              <span class="btn">Syn2</span>
-              <span class="btn">Syn3</span>
+              <div> ${createElement(word.synonyms)}</div>
           </div>
             
     `
     document.getElementById('my_modal_5').showModal();
+}
+
+//7
+
+const createElement=(arr)=>{
+    const htmlElements=arr.map(el=>`<span class="btn">${el}</span>`);
+    return htmlElements.join(" ");
 }
 
 //step-4
